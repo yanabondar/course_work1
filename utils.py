@@ -1,4 +1,4 @@
-import ...
+import json, datetime
 
 def get_data():
     with open('operations.json', 'r', encoding='uft-8') as file:
@@ -21,9 +21,9 @@ def get_last_values(data, count_last_values):
 def get_formatted_data(data):
     formatted_data = []
     for row in data:
-        date = datetime.strptime(row["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
+        date = datetime.strftime(row["date"], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
         description = row["description"]
-        recipient = f"{row['to'].split()[0]} **{row['to'][-4:]}"
+        recipient = f"{row['to'].split()[0]} **{row['to'] [-4:]}"
         operations_amount = f"{row['operationAmount']['amount']} {row['operationAmount']['currency']['name']}"
         if "from" in row:
             sender = row["from"].split()
